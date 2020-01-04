@@ -82,6 +82,10 @@ section.game td {
 
 /*Illuminating White tiles*/
 
+#choose0:hover{
+	background-color:white;
+
+}
 #choose1:hover{
 	background-color:white;
 
@@ -103,10 +107,6 @@ section.game td {
 
 }
 #choose6:hover{
-	background-color:white;
-
-}
-#choose7:hover{
 	background-color:white;
 
 }
