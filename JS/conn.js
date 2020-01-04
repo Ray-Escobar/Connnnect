@@ -28,23 +28,74 @@ function Board(grid){
 	this.red  = '#b83d3d';
 	this.blue = '#5275cc';
 	this.currentColor = true; //if true, red
+	this.add = function() {
+		console.log('to implement');
+		
+	};
+	this.verifyWin = function() {
+		console.log('to implement');
+	};
+	this.cleanBoard = function() {
+		console.log('to implement');
+		
+	};
+	this.fillBlock = function (num) {
+		let i = 0;
+		while(i < 5 && this.grid[i+1][num] === 0){
+			i++;
+		}
+		this.grid[i][num] = 1;
+		let test = document.getElementById( i + '' + num);
+		test.style.backgroundColor = '#b83d3d';
+	};
+	this.changeColor = function() {
+		console.log('to implement');
+	};
+};
 	
-	this.add = function(params) {
-		console.log('to implement');
-		
-	}
-	this.verifyWin = function(params) {
-		console.log('to implement');
-	}
-	this.cleanBoard = function(params) {
-		console.log('to implement');
-		
-	}
-	this.changeColor = function(params) {
-		this.currentColor = false;
-	}
+	
 
-}
+
+function Person(first, last, age, gender, interests) {
+	this.name = {
+	  'first': first,
+	  'last' : last
+	};
+	this.age = age;
+	this.gender = gender;
+	this.interests = interests;
+	this.bio = function() {
+		var string = this.name.first + ' ' + this.name.last + ' is ' + this.age + ' years old. ';
+		var pronoun;
+		if(this.gender === 'male' || this.gender === 'Male' || this.gender === 'm' || this.gender === 'M') {
+			pronoun = 'He likes ';
+		} else if(this.gender === 'female' || this.gender === 'Female' || this.gender === 'f' || this.gender === 'F') {
+			pronoun = 'She likes ';
+		} else {
+			pronoun = 'They like ';
+		}
+		string += pronoun;
+		// use another conditional to structure the last part of the
+		// second sentence depending on number of interests
+		if(this.interests.length === 1) {
+			string += this.interests[0] + '.';
+		} else {
+			// if there are more than 2 interests, we loop through them
+			for(var i = 0; i < this.interests.length; i++) {
+				if(i === this.interests.length - 1) {
+					string += 'and ' + this.interests[i] + '.';
+				} else {
+					string += this.interests[i] + ', ';
+				}
+			}
+		}
+		// finally, with the string built, we alert() it
+		alert(string);
+	};
+	this.greeting = function() {
+		alert('Hi! I\'m ' + this.name.first + '.');
+	};
+};
 
 
 /*Implement the sidebar object*/
