@@ -20,16 +20,51 @@ function arrayPrinter2d(arr){
 	}
 }
 
-/*Game object: brings all other three objects together, runs basic operations*/
+/*Object Game: brings all other three objects together, runs basic operations*/
 
 function Game(){
-	this.board 	 = new Board();
-	this.sidebar = new Sidebar();
-	this.time    = new Timer();
+	this.alternate = true;  
+	this.board 	   = new Board();
+	this.sidebar   = new Sidebar();
+	this.time      = new Timer();
+	this.count     = 0; 		//count all moves(so it not exceed 42 moves)
+	this.topText   = document.querySelectorAll('span');
 
+	/*Add verification for ties*/
 	this.fill = function(num){
-		this.board.fillBlock(num);
+		if(this.board.validBlock(num)){
+			let i = this.board.fillBlock(num)
+			if(this.board.verifyWin(i, num)) this.board.cleanBoard();
+			this.board.changeColor();
+			this.changeTextColor();
+			count++;
+		}else{
+			window.prompt('This is not a valid move, try again');
+		}
+		
+		if(count === 42){
+			window.prompt('It\'s a draw');
+			this.board.cleanBoard();
 
+		} 
+		
+	};
+	this.changeTextColor = function(){
+		for(let i = 0; i < this.topText.length; i++){
+			if(this.alternate){
+				this.topText[i].style.color = '#5275cc';
+				this.topText[i].textContent = 'Blue\'s';
+			} 
+			else {
+				this.topText[i].style.color = '#b83d3d';
+				this.topText[i].textContent = 'Red\'s';
+
+			}			   		
+		}
+		this.alternate = !this.alternate;
+	};
+	this.updateScore() = function(){
+		console.log('To implement');
 	}
 }
 
@@ -40,7 +75,6 @@ function Board(){
 	this.blue = '#5275cc';
 	this.gray = '#333333';
 	this.currentColor = 1;        //starter color: 1 ==red, 2 == blue
-	this.count = 0; 			  //count all moves(not exceed 42 moves)
 
 	//input is square coordinates of new square
 	this.verifyWin = function(i, j) { 
@@ -59,16 +93,26 @@ function Board(){
 				block.style.backgroundColor = this.gray;
 			}
 		}
-		arrayPrinter2d(this.grid);
-		
+		this.count = 0;		
 	};
+
+	/* Checks if there is space in the 
+	 * top of the matrix
+	 */
+	this.validBlock = function(num){
+		if(this.grid[0][num] === 0) return true;
+		else false;
+
+	}
 	this.fillBlock = function (num) {
 		let i = 0;
 		while(i < 5 && this.grid[i+1][num] === 0){
 			i++;
 		}
-		this.grid[i][num] = this.currentColor; 	//fill the grid
+		this.grid[i][num] = this.currentColor; 	//fill grid spot
 		this.fill(i, num); 						//fill the actual square in html
+		this.count++;
+		return i;
 	};
 
 	/* Targets and fills the actual block
@@ -76,24 +120,17 @@ function Board(){
 	 * If there is a win the win resets
 	 */ 
 	this.fill = function(i, j){ 
-		let block = document.getElementById( i + '' + j); //craete string and look for element
+		let block = document.getElementById( i + '' + j); //craete string and query for element
 		if(this.currentColor === 1) block.style.backgroundColor = this.red;
-		else 						block.style.backgroundColor = this.blue;
-		
-		this.count++;
-		if(this.verifyWin(i, j)) this.cleanBoard();
-		this.changeColor();
-		
-		
+		else 						block.style.backgroundColor = this.blue;	
 	};
 	/* Change current color*/
 	this.changeColor = function() {
 		if(this.currentColor === 1) this.currentColor = 2; //if red, change to blue
 		else this.currentColor = 1;						   //if blue, change to red
 	};
-
 	/*
-	 * Utility functions to verify if someone has won the game
+	 * Functions to verify if someone has won the game
 	 */
 	this.verticalVerify = function(j){
 		let vertCount = 0;
