@@ -20,27 +20,81 @@ function arrayPrinter2d(arr){
 	}
 }
 
+/*Game object: brings all other three objects together, runs basic operations*/
+
+function Game(){
+	this.board 	 = new Board();
+	this.sidebar = new Sidebar();
+	this.time    = new Timer();
+
+	this.fill = function(num){
+		this.board.fillBlock(num);
+
+	}
+}
+
 /*Implement main board*/
 function Board(){
 	this.grid = gridCreator();
 	this.red  = '#b83d3d';
 	this.blue = '#5275cc';
+	this.gray = '#333333';
 	this.currentColor = 1;        //starter color: 1 ==red, 2 == blue
 	this.count = 0; 			  //count all moves(not exceed 42 moves)
 
-	this.verifyWin = function(i, j) { //input is square coordinates of new square
-		console.log(arrayPrinter2d(this.grid));
-		//console.log(i + '' + j);
-		//console.log(this.grid[i][j]);
-		//console.log(this.currentColor);
-		this.verticalVerify(j);
-		this.horizontalVerfy(i);
-		this.diagonalVerify1(i, j);
-		this.diagonalVerify1(i, j);
-		this.diagonalVerify2(i, j);
+	//input is square coordinates of new square
+	this.verifyWin = function(i, j) { 
+		if(this.verticalVerify(j))     return true; 
+		if(this.horizontalVerfy(i))    return true; 
+		if(this.diagonalVerify1(i, j)) return true; 
+		if(this.diagonalVerify2(i, j)) return true
+		else return false;
+		
+	};
+	this.cleanBoard = function() {
+		for(let i = 0; i < this.grid.length; i++){
+			for(let j = 0; j < this.grid[0].length; j++){
+				this.grid[i][j] = 0;
+				let block = document.getElementById( i + '' + j);
+				block.style.backgroundColor = this.gray;
+			}
+		}
+		arrayPrinter2d(this.grid);
+		
+	};
+	this.fillBlock = function (num) {
+		let i = 0;
+		while(i < 5 && this.grid[i+1][num] === 0){
+			i++;
+		}
+		this.grid[i][num] = this.currentColor; 	//fill the grid
+		this.fill(i, num); 						//fill the actual square in html
+	};
+
+	/* Targets and fills the actual block
+	 * If then calls teh verify win function
+	 * If there is a win the win resets
+	 */ 
+	this.fill = function(i, j){ 
+		let block = document.getElementById( i + '' + j); //craete string and look for element
+		if(this.currentColor === 1) block.style.backgroundColor = this.red;
+		else 						block.style.backgroundColor = this.blue;
+		
+		this.count++;
+		if(this.verifyWin(i, j)) this.cleanBoard();
+		this.changeColor();
 		
 		
 	};
+	/* Change current color*/
+	this.changeColor = function() {
+		if(this.currentColor === 1) this.currentColor = 2; //if red, change to blue
+		else this.currentColor = 1;						   //if blue, change to red
+	};
+
+	/*
+	 * Utility functions to verify if someone has won the game
+	 */
 	this.verticalVerify = function(j){
 		let vertCount = 0;
 		for(let n = 0; n < 6; n++){
@@ -68,6 +122,8 @@ function Board(){
 		}
 		return false;
 	};
+
+	/* diagonal in this direction -> \  */
 	this.diagonalVerify1 = function(i, j){
 		let diagCount = 1;
 		let i2 = i;
@@ -93,6 +149,7 @@ function Board(){
 		}
 		return false;
 	};
+	/*diagonal in this direction -> /   */
 	this.diagonalVerify2 = function(i, j){
 		let diagCount = 1;
 		let i2 = i;
@@ -117,34 +174,6 @@ function Board(){
 			return true;
 		}
 		return false;
-
-	};
-	this.cleanBoard = function() {
-		console.log('to implement');
-		
-	};
-	this.fillBlock = function (num) {
-		let i = 0;
-		while(i < 5 && this.grid[i+1][num] === 0){
-			i++;
-		}
-		this.grid[i][num] = this.currentColor; 	//fill the arrayy
-		this.fill(i, num); 						//fill the actual square in html
-		this.changeColor(); 					//change color
-		this.count++;
-	};
-
-	//targets and fills the actual block
-	this.fill = function(i, j){ 
-		let block = document.getElementById( i + '' + j); //craete string and look for element
-		if(this.currentColor === 1) block.style.backgroundColor = this.red;
-		else 						block.style.backgroundColor = this.blue;
-		this.verifyWin(i, j);
-	};
-	//changes the current color
-	this.changeColor = function() {
-		if(this.currentColor === 1) this.currentColor = 2; //if red, change to blue
-		else this.currentColor = 1;						   //if blue, change to red
 	};
 };
 	
@@ -153,6 +182,17 @@ function Board(){
 function Sidebar(){
 	this.score = 0;
 }
+
+
+
+/*Implement the timer object*/
+function Timer(){
+	this.time = 0;
+}
+
+
+let game  = new Game();  //game object
+
 
 /*
 class Shape{
@@ -166,15 +206,7 @@ class Shape{
 	}
 }*/
 
-/*Implement the timer object*/
-function Timer(){
-	this.time = 0;
-}
-
-
-let board = new Board(); //board
-
-let square = new Shape(333 , 12, 20);
+//let square = new Shape(333 , 12, 20);
 //square.sayHello();
 
 /*Button Listener Events*/
@@ -188,25 +220,25 @@ const button6 = document.getElementById('choose6');
 
 
 button0.addEventListener('click', function(){
-	board.fillBlock(0);
+	game.fill(0);
 });
 button1.addEventListener('click', function(){
-	board.fillBlock(1);
+	game.fill(1);
 });
 button2.addEventListener('click', function(){
-	board.fillBlock(2);
+	game.fill(2);
 });
 button3.addEventListener('click', function(){
-	board.fillBlock(3);
+	game.fill(3);
 });
 button4.addEventListener('click', function(){
-	board.fillBlock(4);
+	game.fill(4);
 });
 button5.addEventListener('click', function(){
-	board.fillBlock(5);
+	game.fill(5);
 });
 button6.addEventListener('click', function(){
-	board.fillBlock(6);
+	game.fill(6);
 });
 
 
