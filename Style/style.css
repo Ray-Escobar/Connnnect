@@ -71,6 +71,10 @@ header p span{
 	color: #b83d3d;
 }
 
+.ret-sound td:hover{
+	background-color: white;
+}
+
 
 
 
@@ -78,35 +82,6 @@ header p span{
 section.game td {
 	background-color: #333333;
 }
-
-
-/*Illuminating White tiles*/
-
-#choose0:hover{
-	background-color:white;
-
-}
-#choose1:hover{
-	background-color:white;
-
-}
-#choose2:hover{
-	background-color:white;
-
-}
-#choose3:hover{
-	background-color:white;
-
-}
-#choose4:hover{
-	background-color:white;
-
-}
-#choose5:hover{
-	background-color:white;
-
-}
-#choose6:hover{
-	background-color:white;
-
+.selectors td:hover{
+	background-color: white;
 }
