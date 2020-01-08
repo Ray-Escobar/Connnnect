@@ -1,5 +1,6 @@
 //@ts-check
 
+
 /*Function to create 2d array, JS doesn't do any favors*/
 function gridCreator(){
 	let arr = new Array(6);
@@ -16,6 +17,7 @@ function gridCreator(){
 	}
 	return arr;
 }
+
 
 /*Utility function to print the array (debugging) */
 function arrayPrinter2d(arr){
@@ -34,19 +36,18 @@ function Game(){
 	this.count     = 0; 		//count all moves(so it not exceed 42 moves)
 
 	this.fill = function(num){
+		console.log(num);
 		if(this.board.validBlock(num)){
 			let i = this.board.fillBlock(num);    //fill and return row of fill
 
 			if(this.board.verifyWin(i, num)){
 				this.reset(true);
-				this.time.resetTime();
 			}else{
 				this.board.changeColor();
 				this.changeTextColor();
 				this.count++;
+				this.resetTime();
 			} 
-		}else{
-			window.prompt('This is not a valid move, try again');
 		}
 
 		//Check if a tie has occured
@@ -71,6 +72,7 @@ function Game(){
 		this.board.cleanBoard();
 		this.changeTextColor(); 
 		this.board.changeColor(); //other player starts new game  
+		this.resetTime();
 		this.count = 0;
 	}
 	this.updateScore = function(){
@@ -78,15 +80,15 @@ function Game(){
 		else							 	 this.sidebar.blueWin();
 		
 	}
+	this.resetTime = function(){
+		this.time.resetTime();
+	}
 	this.decreaseTime = function(){
 		this.time.decrementTime();
-		document.getElementById('time').textContent = (this.time.getTime()) + '';
 		if(this.time.getTime() == 0){
-			this.time.resetTime();
-			this.board.changeColor();
-			this.changeTextColor();
-
-		} 
+			this.resetTime();
+			this.fill(Math.floor(Math.random()*7));
+		}
 	}
 }
 
@@ -269,9 +271,11 @@ function Timer(){
 	}
 	this.decrementTime = function(){
 		this.time--;
+		document.getElementById('time').textContent = (this.getTime()) + '';
 	}
 	this.resetTime = function(){
-		this.time = 21;
+		this.time = 20;
+		document.getElementById('time').textContent = (this.getTime()) + '';
 	}
 }
 
@@ -325,8 +329,7 @@ reset.addEventListener('click', function(){
 	game.reset(false);
 });
 
-
-
+/*Every second the counter is decreased*/
 let countDown = setInterval(function(){
 	game.decreaseTime();
 }, 1000);
@@ -348,3 +351,4 @@ class Shape{
 
 //let square = new Shape(333 , 12, 20);
 //square.sayHello();
+
