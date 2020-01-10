@@ -1,0 +1,87 @@
+body{
+	background-color: #2c2c2c;
+}
+p, h2{
+	color:white;
+}
+table {
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+  	border-spacing: 5px;
+    /*width: 800px;*/
+}
+
+table, td {
+    border: 1px #a1a1a1;
+	border-radius: 10px;
+	
+    
+}
+td {
+  height: 100px;
+  width: 100px;
+  text-align:center;
+}
+
+/*Header Styling*/
+h1{
+	text-align: center;
+	color:white;
+
+}
+header p{
+	text-align: center;
+}
+
+header p span{
+	color: #b83d3d;
+}
+
+
+/* Side bar Styling*/
+.sidebar{
+	float: right;
+	padding-top: 100px;
+}
+.sidebar h2{
+	text-align: center;
+}
+.sidebar .players{
+	display: flex;
+}
+.players p{
+	padding-top: 50px; 
+	padding-right:10px;
+}
+
+.timer{
+	text-align: center;
+	background-color: #333333;
+	padding-top: 5px;
+	border-radius: 10px;
+}
+.timer #time{ /*Styling of actual time*/
+	font-size: 40px;
+	padding-bottom: 20px;
+}
+.timer span{ /*Color of 'Jayson Turn*/
+	color: #b83d3d;
+}
+
+.ret-sound td:hover{
+	background-color: white;
+}
+
+
+
+
+/*Style for game table */
+section.game td {
+	background-color: #333333;
+}
+.selectors td:hover{
+	background-color: white;
+}
