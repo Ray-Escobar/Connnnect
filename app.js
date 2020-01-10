@@ -1,10 +1,10 @@
 
-var express = require("express");
-var http = require("http");
+const express = require("express");
+const http = require("http");
 
-var port = process.argv[2];
-var app = express();
-var indexRouter = require('./routes/index');
+const port = process.argv[2];
+const app = express();
+const indexRouter = require('./routes/index');
 
 
 app.use(express.static(__dirname + "/public"));
