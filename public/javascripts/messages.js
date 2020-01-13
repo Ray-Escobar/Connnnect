@@ -16,6 +16,14 @@
   };
   exports.S_GAME_ABORTED = JSON.stringify(exports.O_GAME_ABORTED);
 
+    /*
+   * Server to client: abort game (e.g. if second player exited the game)
+   */
+  exports.O_GAME_DRAW = {
+    type: "GAME-DRAW"
+  };
+  exports.S_GAME_DRAW = JSON.stringify(exports.O_GAME_DRAW);
+
   /*
    * Server to client: abort game (e.g. if second player exited the game)
    */

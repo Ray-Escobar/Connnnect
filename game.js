@@ -21,7 +21,7 @@ game.prototype.transitionStates["1 JOINT"] = 1; // 1 PLAYER HAS JOINED
 game.prototype.transitionStates["2 JOINT"] = 2; // BOTH PLAYERS HAVE JOINED
 game.prototype.transitionStates["GAME ON"] = 3; // FIRST TURN HAS BEEN PLAYED
 game.prototype.transitionStates["1"] = 4;       // PLAYER 1 WON THE GAME
-game.prototype.transitionStates["B"] = 5;       // PLAYER 2 WON THE GAME
+game.prototype.transitionStates["2"] = 5;       // PLAYER 2 WON THE GAME
 game.prototype.transitionStates["ABORTED"] = 6; // GAME WAS ABORTED
 /**
  * Because not every game state can transition to each other,
@@ -29,14 +29,14 @@ game.prototype.transitionStates["ABORTED"] = 6; // GAME WAS ABORTED
  * so that they are checked each time a state change is attempted
  */
 game.prototype.transitionMatrix = [
-    [0, 1, 0, 0, 0, 0, 0],  //0 JOINT
-    [1, 0, 1, 0, 0, 0, 0],  //1 JOINT
-    [0, 0, 0, 1, 0, 0, 1],  //2 JOINT
-    [0, 0, 0, 1, 1, 1, 1],  //CHAR GUESSED
-    [0, 0, 0, 0, 0, 0, 0],  //A WON
-    [0, 0, 0, 0, 0, 0, 0],  //B WON
-    [0, 0, 0, 0, 0, 0, 0]   //ABORTED
-];
+    [0, 1, 0, 0, 0, 0, 0],  // 0 JOINT
+    [1, 0, 1, 0, 0, 0, 0],  // 1 JOINT
+    [0, 0, 0, 1, 0, 0, 1],  // 2 JOINT
+    [0, 0, 0, 1, 1, 1, 1],  // GAME ON
+    [0, 0, 0, 0, 0, 0, 0],  // A WON
+    [0, 0, 0, 0, 0, 0, 0],  // B WON
+    [0, 0, 0, 0, 0, 0, 0]   // ABORTED
+];// 0  1  2  3  4  5  6
 /**
  * Verifies whether or not a transition is valid.
  */

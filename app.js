@@ -71,8 +71,8 @@ wss.on("connection", (ws) => {
     con.on("message", (message) => {
         let oMsg = JSON.parse(message);
 
-        let gameObj = websockets[con.id];
-        let curPlayer = con;
+        let gameObj = websockets[con.id]; //check from which players the message comes
+        let curPlayer = con;             
         let nextPlayer = gameObj.player1 == con ? gameObj.player2 : gameObj.player1;
 
         // If someone picked a column, change turns
