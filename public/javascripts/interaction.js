@@ -25,10 +25,6 @@ const reset   = document.getElementById('reset');
 
 
 
-/*
-button6.addEventListener('click', function(){
-	game.fill(6);
-});*/
 reset.addEventListener('click', function(){
 	game.reset();
 });
@@ -36,6 +32,8 @@ reset.addEventListener('click', function(){
 
 
 (function setup() {
+
+    //NOTE: this port has to be the same as the one started in server!!!!!!!
     var socket = new WebSocket("ws://localhost:3348");
 
 
@@ -67,7 +65,7 @@ reset.addEventListener('click', function(){
 
 
     button0.addEventListener('click', function(){
-        sendColumn(0);
+        sendColumn(0); //uses function to send mssg to server
         game.fill(0);
     });
     button1.addEventListener('click', function(){
