@@ -53,7 +53,7 @@ wss.on("connection", function(ws) {
     "Player %s placed in game %s as %s",
     con.id,
     currentGame.id,
-    playerNum
+    playerNum,
   );
   
   /*Send each player if they are P1 or P2*/
@@ -66,11 +66,12 @@ wss.on("connection", function(ws) {
    */
   if (currentGame.hasTwoConnectedPlayers()) {
     console.log('Game Initialized');
-    currentGame = new Game(gameStatus.gamesInitialized++);
+    currentGame = new Game(gameStatus.gamesInitialized++);    
+    let gameObj = websockets[con.id];
+    gameObj.player1.send(messages.S_GAME_STARTED); //start game mssg to p1
+    gameObj.player2.send(messages.S_GAME_STARTED); //start game mssg to p2
+    
   }
-
-
-
 
   con.on("message", function incoming(message) {
     let oMsg = JSON.parse(message);
@@ -88,7 +89,43 @@ wss.on("connection", function(ws) {
 
   });
 
-        
+  con.on("close", function(code) {
+    /*
+     * code 1001 means almost always closing initiated by the client;
+     * source: https://developer.mozilla.org/en-US/docs/Web/API/CloseEvent
+     */
+    console.log(con.id + " disconnected ...");
+
+    if (code == "1001") {
+      /*
+       * if possible, abort the game; if not, the game is already completed
+       */
+      let gameObj = websockets[con.id];
+
+      if (gameObj.isValidTransition(gameObj.gameState, "ABORTED")) {
+        gameObj.setStatus("ABORTED");
+        gameStatus.gamesAborted++;
+
+        /*
+         * determine whose connection remains open;
+         * close it
+         */
+        try {
+          gameObj.playerA.close();
+          gameObj.playerA = null;
+        } catch (e) {
+          console.log("Player A closing: " + e);
+        }
+
+        try {
+          gameObj.playerB.close();
+          gameObj.playerB = null;
+        } catch (e) {
+          console.log("Player B closing: " + e);
+        }
+      }
+    }
+  });   
 });
 
 server.listen(port);

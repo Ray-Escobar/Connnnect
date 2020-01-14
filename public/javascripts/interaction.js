@@ -30,17 +30,18 @@ reset.addEventListener('click', function(){
 });
 
 
-
+var yourTurn = false; //if it's true, you are allowed to play
+let obj = {'turn': false};
 (function setup() {
 
     //NOTE: this port has to be the same as the one started in server!!!!!!!
-    var socket = new WebSocket("ws://localhost:3348");
-
+    var socket   = new WebSocket("ws://localhost:3200");
+    let yourTurn = false;
+    
+    
+     
 
     /*
-    socket.onmessage = function(event){
-        document.getElementById("hello").innerHTML = event.data;
-    }
     socket.onopen = function(){
         socket.send("Hello from the client!");
     };*/
@@ -49,50 +50,89 @@ reset.addEventListener('click', function(){
         let outgoingMsg = Messages.O_PICK_A_COLUMN;
         outgoingMsg.data = col;  //column number
         socket.send(JSON.stringify(outgoingMsg));
+        yourTurn = false;
+        document.getElementById('selectors').className = 'Not-your-turn'; //deactivate glow on selectors
     }
+
     socket.onmessage = function(mssg){
-        //console.log(mssg);
         let incomingMsg = JSON.parse(mssg.data);
         if(incomingMsg.type == 'PLAYER-JOINED'){
-            /*to implement, notify player who they are*/
-            console.log('You are player ' + incomingMsg.data);
+            if(incomingMsg.data === 1){
+                game.board.currentColor = 1; //p1 is red
+                yourTurn = true;
+            } 
+            else{
+                game.board.currentColor = 2; //p2 is blue
+                document.getElementById('selectors').className = 'Not-your-turn';
+            }                       
+            
+        }else if(incomingMsg.type == 'GAME-STARTED'){
+            let text = document.querySelector('header p');
+            let sp = document.createElement('span');
+            text.textContent = 'turn';
+            sp.textContent = 'Red\'s ';
+            text.prepend(sp);
+
         }else{
-            game.fill(incomingMsg.data); //fill in block from what server sends
+            document.getElementById('selectors').className = 'selectors';
+            game.fillOpponent(incomingMsg.data); //fill in col from what server sends
+            yourTurn = true;
+            
         }
         
     }
 
-
-
-
+    /*Boolean manages turns of players, updated on each connect with server*/
     button0.addEventListener('click', function(){
-        sendColumn(0); //uses function to send mssg to server
-        game.fill(0);
+        if(yourTurn){
+            sendColumn(0); //uses function to send mssg to server
+            game.fill(0);
+        }
+        
     });
     button1.addEventListener('click', function(){
-        sendColumn(1);
-        game.fill(1);
+        if(yourTurn){
+            sendColumn(1);
+            game.fill(1);
+        }
+        
     });
     button2.addEventListener('click', function(){
-        sendColumn(2);
-        game.fill(2);
+        if(yourTurn){
+            sendColumn(2);
+            game.fill(2); 
+        }
+       
     });
     button3.addEventListener('click', function(){
-        sendColumn(3);
-        game.fill(3);
+        if(yourTurn){
+            sendColumn(3);
+            game.fill(3);
+        }
+        
     });
     button4.addEventListener('click', function(){
-        sendColumn(4);
-        game.fill(4);
+        if(yourTurn){
+            sendColumn(4);
+            game.fill(4);
+        }
+        
     });
     button5.addEventListener('click', function(){
-        sendColumn(5);
-        game.fill(5);
+        if(yourTurn){
+            sendColumn(5);
+            game.fill(5);
+        }
+       
     });
     button6.addEventListener('click', function(){
-        sendColumn(6);
-        game.fill(6);
+        if(yourTurn){
+            sendColumn(6);
+            game.fill(6);   
+        }
     });
+    
+    
 
 })(); //executres immediately
 
@@ -103,4 +143,7 @@ reset.addEventListener('click', function(){
 let countDown = setInterval(function(){
 	game.decreaseTime();
 }, 1000);
+
+
+
 */

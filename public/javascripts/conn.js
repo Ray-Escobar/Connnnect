@@ -42,7 +42,6 @@ function Game(){
 			if(this.board.verifyWin(i, num)){
 				this.reset(true);
 			}else{
-				this.board.changeColor();
 				this.changeTextColor();
 				this.count++;
 				this.resetTime();
@@ -56,6 +55,13 @@ function Game(){
 		} 
 		
 	};
+	this.fillOpponent = function(num){
+		this.board.changeColor(); //use opponents color to fill block
+		this.fill(num);
+		this.board.changeColor(); //revert back to your own player color
+
+
+	}
 	/*Alternate text color to i
 	 *indicate player's turn
 	 */
@@ -66,20 +72,19 @@ function Game(){
 	/*If someone won, score update occurs
 	 *If someone pressed reset, no score update
 	 */
-	this.reset = function(){
-		//if(win) this.updateScore();
+	/*TO FIX!!!!!!!!!!!*/
+	this.reset = function(win){
+		if(win) this.updateScore();
 		this.board.cleanBoard();
 		this.changeTextColor(); 
-		this.board.changeColor(); //other player starts new game  
 		this.resetTime();
 		this.count = 0;
 	}
-	/* logic is wrong here
 	this.updateScore = function(){
 		if(this.board.getCurrentColor() === 1) this.sidebar.redWin();
 		else							 	   this.sidebar.blueWin();
 		
-	}*/
+	}
 	this.resetTime = function(){
 		this.time.resetTime();
 	}
@@ -90,6 +95,12 @@ function Game(){
 			this.fill(Math.floor(Math.random()*7));
 		}
 	}
+	/*
+	this.playerColor = function(color){
+		this.board.changeColor(color); //if 1 red, if 2 blue
+		//console.log(this.board.getCurrentColor);
+
+	}*/
 }
 
 /*Implement main board*/
