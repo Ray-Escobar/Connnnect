@@ -41,10 +41,10 @@ reset.addEventListener('click', function(){
     socket.onmessage = function(event){
         document.getElementById("hello").innerHTML = event.data;
     }
-    
     socket.onopen = function(){
         socket.send("Hello from the client!");
     };*/
+
     function sendColumn(col){
         let outgoingMsg = Messages.O_PICK_A_COLUMN;
         outgoingMsg.data = col;  //column number
@@ -54,6 +54,7 @@ reset.addEventListener('click', function(){
         //console.log(mssg);
         let incomingMsg = JSON.parse(mssg.data);
         if(incomingMsg.type == 'PLAYER-JOINED'){
+            /*to implement, notify player who they are*/
             console.log('You are player ' + incomingMsg.data);
         }else{
             game.fill(incomingMsg.data); //fill in block from what server sends
