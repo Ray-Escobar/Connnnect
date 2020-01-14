@@ -36,7 +36,6 @@ function Game(){
 	this.count     = 0; 		//count all moves(so it not exceed 42 moves)
 
 	this.fill = function(num){
-		console.log(num);
 		if(this.board.validBlock(num)){
 			let i = this.board.fillBlock(num);    //fill and return row of fill
 
@@ -50,7 +49,7 @@ function Game(){
 			} 
 		}
 
-		//Check if a tie has occured
+		/*To implemet, draw in server*/
 		if(this.count === 42){
 			window.prompt('It\'s a draw');
 			this.board.cleanBoard();
@@ -67,19 +66,20 @@ function Game(){
 	/*If someone won, score update occurs
 	 *If someone pressed reset, no score update
 	 */
-	this.reset = function(win){
-		if(win) this.updateScore();
+	this.reset = function(){
+		//if(win) this.updateScore();
 		this.board.cleanBoard();
 		this.changeTextColor(); 
 		this.board.changeColor(); //other player starts new game  
 		this.resetTime();
 		this.count = 0;
 	}
+	/* logic is wrong here
 	this.updateScore = function(){
 		if(this.board.getCurrentColor() === 1) this.sidebar.redWin();
-		else							 	 this.sidebar.blueWin();
+		else							 	   this.sidebar.blueWin();
 		
-	}
+	}*/
 	this.resetTime = function(){
 		this.time.resetTime();
 	}
@@ -280,75 +280,6 @@ function Timer(){
 }
 
 
-/* * * * * * * * *
- * Game functionality starts here:
- * We create a game object that manages all 
- * the game events. When a player clicks on 
- * one of the columns, the listeners activate 
- * the Game method Fill(col). Game also manages
- * the time object and the side bar to keep record
- * of the game score, reset options and music 
- * option
- * * * * * * * * */
-
-let game  = new Game();  //game object
-
-/*Button Listener Events*/
-const button0 = document.getElementById('choose0');
-const button1 = document.getElementById('choose1');
-const button2 = document.getElementById('choose2');
-const button3 = document.getElementById('choose3');
-const button4 = document.getElementById('choose4');
-const button5 = document.getElementById('choose5');
-const button6 = document.getElementById('choose6');
-const reset   = document.getElementById('reset');
 
 
-button0.addEventListener('click', function(){
-	game.fill(0);
-});
-button1.addEventListener('click', function(){
-	game.fill(1);
-});
-button2.addEventListener('click', function(){
-	game.fill(2);
-});
-button3.addEventListener('click', function(){
-	game.fill(3);
-});
-button4.addEventListener('click', function(){
-	game.fill(4);
-});
-button5.addEventListener('click', function(){
-	game.fill(5);
-});
-button6.addEventListener('click', function(){
-	game.fill(6);
-});
-reset.addEventListener('click', function(){
-	game.reset(false);
-});
-
-/*Every second the counter is decreased*/
-let countDown = setInterval(function(){
-	game.decreaseTime();
-}, 1000);
-
-
-
-
-/*
-class Shape{
-	constructor(id, x, y){
-		this.id = id;
-		this.x = x;
-		this.y = y;
-	}
-	sayHello(){
-		window.prompt('Jesus bro');
-	}
-}*/
-
-//let square = new Shape(333 , 12, 20);
-//square.sayHello();
 

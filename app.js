@@ -5,11 +5,11 @@ const websocket = require("ws");
 const port = process.argv[2];
 const app = express();
 
-const indexRouter = require('./routes/index');
+const indexRouter = require('./routes/index.js');
 const messages = require("./public/javascripts/messages");
 
 const gameStatus = require("./statTracker");
-const Game = require("./game");
+const Game = require("./game");             //import game module
 
 /* -----<======================================>----- */
 app.set("view engine", "ejs");  // So we can use the ejs templates
@@ -17,106 +17,91 @@ app.use(express.static(__dirname + "/public"));
 
 app.use('/', indexRouter);
 
-const server = http.createServer(app);
+var server = http.createServer(app);
+
 const wss = new websocket.Server({ server });
+var websockets = {}; //property: websocket, value: game
 
-var websockets = {} // List of all current websockets. property = websocket, value = game
-
-/**
- * Regularly cleans up the websockets object.
- * If the gameObj has a final status, game is finished.
+/*
+ * regularly clean up the websockets object
  */
-setInterval(() => {
+setInterval(function() {
     for (let i in websockets) {
+      if (Object.prototype.hasOwnProperty.call(websockets,i)) {
         let gameObj = websockets[i];
-        if (gameObj.finalStatus != null)
-            delete websockets[i];
+        //if the gameObj has a final status, the game is complete/aborted
+        if (gameObj.finalStatus != null) {
+          delete websockets[i];
+        }
+      }
     }
-}, 60000); // Check once every minute
+  }, 50000);
+ 
+var currentGame = new Game(gameStatus.gamesInitialized++);
+var connectionID = 0; //each websocket receives a unique ID
+  
+wss.on("connection", function(ws) {
+  /*
+   * two-player game: every two players are added to the same game
+   */
+  let con = ws;
+  con.id = connectionID++;
+  let playerNum = currentGame.addPlayer(con); //player is con
+  websockets[con.id] = currentGame;
 
-var currentGame = new Game(gameStatus.gamesInitialized++); //Start new Game and increment gamesInit
-var connectionID = 0; // Each websocket has a unique ID
+  console.log(
+    "Player %s placed in game %s as %s",
+    con.id,
+    currentGame.id,
+    playerNum
+  );
+  
+  /*Send each player if they are P1 or P2*/
+  con.send(playerNum == "1" ? messages.S_PLAYER_1 : messages.S_PLAYER_2);
 
-/**
- * When a new player connects...
- */
-wss.on("connection", (ws) => {
-    // Every 2 players are added to the same game
-    let con = ws;
-    con.id = connectionID++;
-    let playerNum = currentGame.addPlayer(con);
-    websockets[con.id] = currentGame;
+  
+  /* once we have two players, there is no way back;
+   * a new game object is created;
+   * if a player now leaves, the game is aborted (player is not preplaced)
+   */
+  if (currentGame.hasTwoConnectedPlayers()) {
+    console.log('Game Initialized');
+    currentGame = new Game(gameStatus.gamesInitialized++);
+  }
 
-    console.log(`Player ${con.id} placed in game ${currentGame.id} as P${playerNum}`);
-    /**
-     * Inform the client about its assigned number
-     */
-    con.send(playerNum == "1" ? messages.S_PLAYER_1 : messages.S_PLAYER_2);
 
-    /**
-     * Once we have two players, prepare new game object
-     * and give the greenlight to Player 1
-     */
-    if (currentGame.hasTwoConnectedPlayers()) {
-        currentGame = new Game(gameStatus.gamesInitialized++);
-        //TODO: Implement the greenlight for Player 1
+
+
+  con.on("message", function incoming(message) {
+    let oMsg = JSON.parse(message);
+
+    let gameObj = websockets[con.id];
+    let isPlayer1 = gameObj.player1 == con ? true : false;
+    
+    console.log("[LOG] " + oMsg.data);
+    
+    if(isPlayer1){
+        gameObj.player2.send((JSON.stringify(oMsg)));
+    }else{
+        gameObj.player1.send((JSON.stringify(oMsg)));
     }
 
-    /**
-     * Message coming in from a player:
-     * 1. From which game?
-     * 2. From which player (curPlayer)? To which player (nextPlayer)?
-     * 3. Send the message to opposing player (OP)
-     */
-    con.on("message", (message) => {
-        let oMsg = JSON.parse(message);
+  });
 
-        let gameObj = websockets[con.id]; //check from which players the message comes
-        let curPlayer = con;             
-        let nextPlayer = gameObj.player1 == con ? gameObj.player2 : gameObj.player1;
-
-        // If someone picked a column, change turns
-        if (oMsg.type == messages.T_PICK_A_COLUMN) {
-            nextPlayer.send(message);
-            gameObj.setStatus("GAME ON");
-        }
-        // If someone won update status and stats
-        else if (oMsg.type == messages.T_GAME_WON_BY) {
-            gameObj.setStatus(oMsg.data);
-            gameStatus.gamesCompleted++;
-        }
-    });
-
-    con.on("close", (code) => {
-        /*
-        * code 1001 means almost always closing initiated by the client;
-        * source: https://developer.mozilla.org/en-US/docs/Web/API/CloseEvent
-        */
-        console.log(con.id + " disconnected ...");
-
-        if (code == "1001") {
-            let gameObj = websockets[con.id];
-            // If it's possible to abort, do so (else game is completed)
-            if (gameObj.isValidTransition(gameObj.gameState, "ABORTED")) {
-                gameObj.setStatus("ABORTED");
-                gameStatus.gamesAborted++;
-
-                // Determine whose connection remain open and close it
-                try {
-                    gameObj.player1.close();
-                    gameObj.player1 = null;
-                } catch (e) {
-                    console.log("Player 1 closing: " + e);
-                }
-                try {
-                    gameObj.player2.close();
-                    gameObj.player2 = null;
-                } catch (e) {
-                    console.log("Player 2 closing: " + e);
-                }
-            }
-        }
-    });
+        
 });
 
 server.listen(port);
+
+
+
+
+//let's slow down the server response time a bit to make the change visible on the client side
+    /*
+    setTimeout(function() {
+        console.log("Connection state: "+ ws.readyState);
+        
+        ws.send("Thanks for the message. --Your server.");
+        ws.close();
+        console.log("Connection state: "+ ws.readyState);
+    }, 2000);*/
