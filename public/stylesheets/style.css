@@ -1,113 +1,125 @@
-body{
-	background-color: #2c2c2c;
-	font-family: Verdana, Geneva, Tahoma, sans-serif;
-	/* font-family: Tahoma, Arial, sans-serif; */
+body {
+  background-color: #2c2c2c;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  /* font-family: Tahoma, Arial, sans-serif; */
 }
-p, h2{
-	color:white;
+
+p, h2 {
+  color: white;
 }
+
 table {
-    border-collapse: separate;
-    border-spacing: 0;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 10px;
-  	border-spacing: 5px;
-    /*width: 800px;*/
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  border-spacing: 5px;
+  /*width: 800px;*/
 }
 
 table, td {
-    border: 1px #a1a1a1;
-	border-radius: 10px;
+  border: 1px #a1a1a1;
+  border-radius: 10px;
 }
+
 td {
   height: 85px;
   width: 85px;
-  text-align:center;
+  text-align: center;
   margin: 5px;
 }
 
 /*Header Styling*/
-h1{
-	text-align: center;
-	color:white;
-	font-size: 3em;
-	margin: 20px 0px 0px 0px;
-}
-header p{
-	text-align: center;
+
+h1 {
+  text-align: center;
+  color: white;
+  font-size: 3em;
+  margin: 20px 0px 0px 0px;
 }
 
-header p span{
-	color: #b83d3d;
+header p {
+  text-align: center;
 }
 
+header p span {
+  color: #b83d3d;
+}
 
 /* Side bar Styling*/
-.sidebar{
-	float: right;
-	padding-top: 100px;
-}
-.sidebar h2{
-	text-align: center;
-}
-.sidebar .players{
-	display: flex;
-}
-.players p{
-	padding-top: 50px; 
-	padding-right:10px;
+
+.sidebar {
+  float: right;
+  padding-top: 100px;
 }
 
-.timer{
-	text-align: center;
-	background-color: #333333;
-	padding-top: 5px;
-	border-radius: 10px;
-}
-.timer #time{ /*Styling of actual time*/
-	font-size: 40px;
-	padding-bottom: 20px;
-}
-.timer span{ /*Color of 'Jayson Turn*/
-	color: #b83d3d;
+.sidebar h2 {
+  text-align: center;
 }
 
-.ret-sound td:hover{
-	background-color: white;
+.sidebar .players {
+  display: flex;
 }
 
+.players p {
+  padding-top: 50px;
+  padding-right: 10px;
+}
 
+.timer {
+  text-align: center;
+  background-color: #333333;
+  padding-top: 5px;
+  border-radius: 10px;
+}
 
+.timer #time {
+  /*Styling of actual time*/
+  font-size: 40px;
+  padding-bottom: 20px;
+}
+
+.timer span {
+  /*Color of 'Jayson Turn*/
+  color: #b83d3d;
+}
+
+.ret-sound td:hover {
+  background-color: white;
+}
 
 /*Style for game table */
+
 section.game td {
-	background-color: #333333;
+  background-color: #333333;
 }
 
-.selectors td:hover{
-	background-color: white;
+.selectors td:hover {
+  background-color: white;
 }
 
 /*=====================
 	  S P L A S H
 =======================*/
+
 section.splash {
-	font-size: 4rem;
-	color: white;
-	height: 70vh;
-	width: auto;
+  font-size: 4rem;
+  color: white;
+  height: 70vh;
+  width: auto;
 }
+
 section.splash tr.blue-row td:not(:empty) {
-	background-color: #5275cc;
+  background-color: #5275cc;
 }
 
 section.splash tr.red-row td:not(:empty) {
-	background-color: #b83d3d;
+  background-color: #b83d3d;
 }
 
 section.splash tr[data-href]:hover td:not(:empty) {
-	cursor: pointer;
+  cursor: pointer;
 }
 
 /*====================
@@ -125,6 +137,7 @@ section.splash tr[data-href]:hover td:not(:empty) {
   visibility: hidden;
   opacity: 0;
 }
+
 .overlay:target {
   visibility: visible;
   opacity: 1;
@@ -133,55 +146,87 @@ section.splash tr[data-href]:hover td:not(:empty) {
 .popup {
   margin: 70px auto;
   /* padding: 20px; */
-  width: 30%;
+  width: 45%;
   position: relative;
   transition: all 5s ease-in-out;
 }
 
 .popup .popup-header {
-	background-color: #333;
-	border-top-left-radius: 15px;
-	border-top-right-radius: 15px;
+  background-color: #333;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
 }
+
 .popup h2 {
   margin-top: 0;
   color: #fff;
   display: inline-block;
   margin: 10px 20px;
 }
+
 .popup .close {
   transition: all 200ms;
   font-size: 2rem;
   font-weight: bold;
   text-decoration: none;
   color: #b83d3d;
-  float:right;
+  float: right;
   margin-right: 10px;
 }
+
 .popup .close:hover {
   color: #5275cc;
   transform: rotate(30deg);
 }
+
 .popup .content {
   max-height: 30%;
   overflow: auto;
   background-color: #2c2c2c;
   color: #fff;
+  padding-right: 20px;
+  padding-bottom: 10px;
+}
+
+.popup .content ul {
+  list-style: none;
+}
+
+.popup .content li::before {
+  content: "\25A0";
+  /* Add content: \2022 is the CSS Code/unicode for a bullet */
+  color: #b83d3d;
+  /* Change the color */
+  font-weight: bold;
+  /* If you want it to be bold */
+  display: inline-block;
+  /* Needed to add space between the bullet and the text */
+  width: 1em;
+  /* Also needed for space (tweak if needed) */
+  margin-left: -1em;
+  /* Also needed for space (tweak if needed) */
+  position: relative;
+  bottom: 2px;
 }
 
 .popup .content li {
-	font-size: 1.5rem;
-}
-.popup .content li span {
-	font-weight: 100;
-	color: #5275cc;
+  font-size: 1.5rem;
+  margin-bottom: 15px;
 }
 
-@media screen and (max-width: 700px){
-  .box{
-    width: 70%;
+.popup span:not(.white) {
+  color: #5275cc;
+}
+
+.popup span.white {
+  font-weight: bold;
+}
+
+@media screen and (max-width: 700px) {
+  .box {
+    width: 90%;
   }
-  .popup{
-    width: 70%;
+  .popup {
+    width: 90%;
   }
 }

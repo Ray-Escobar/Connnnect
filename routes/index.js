@@ -7,16 +7,14 @@ router.get('/game', function(req, res, next) {
 });
 
 /* GET splash page. */
-router.get('/', function(req, res, next) {
-  res.sendFile("splash.html", { root: "./public" });
-});
+// router.get('/', function(req, res, next) {
+//   res.sendFile("splash.html", { root: "./public" });
+// });
 router.get('/splash', function(req, res, next) {
   res.sendFile("splash.html", { root: "./public" });
 });
-router.get('/*', function(req, res, next) {
-  res.sendFile("splash.html", { root: "./public" });
-});
-
-
+// router.get('/*', function(req, res, next) {
+//   res.sendFile("splash.html", { root: "./public" });
+// });
 
 module.exports = router;

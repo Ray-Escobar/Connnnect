@@ -15,7 +15,17 @@ const Game = require("./game");             //import game module
 app.set("view engine", "ejs");  // So we can use the ejs templates
 app.use(express.static(__dirname + "/public"));
 
+
+
 app.use('/', indexRouter);
+
+app.get("/*", (req, res) => {
+  res.render("splash.ejs", {
+    gamesInitialized: gameStatus.gamesInitialized,
+    gamesCompleted: gameStatus.gamesCompleted,
+    gamesAborted: gameStatus.gamesAborted
+  });
+});
 
 var server = http.createServer(app);
 
