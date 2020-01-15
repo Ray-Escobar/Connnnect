@@ -90,10 +90,14 @@ function Game(){
 	}
 	this.decreaseTime = function(){
 		this.time.decrementTime();
-		if(this.time.getTime() == 0){
+		/*
+		if(this.getTime() == 0){
 			this.resetTime();
-			this.fill(Math.floor(Math.random()*7));
-		}
+			this.fill(Math.floor(Math.random()*7)); //randomly assign a unit
+		}*/
+	}
+	this.getTime = function(){
+		return this.time.getTime();
 	}
 	/*
 	this.playerColor = function(color){
@@ -167,7 +171,7 @@ function Board(){
 			if(this.grid[n][j] === this.currentColor){
 				vertCount++;
 				if(vertCount === 4){
-					window.prompt('vertical Win');
+					//window.prompt('vertical Win');
 					return true;
 				}
 			}else vertCount = 0;
@@ -181,7 +185,7 @@ function Board(){
 			if(this.grid[i][n] === this.currentColor){
 				horCount++;
 				if(horCount === 4){
-					window.prompt('horizontal Win 1'); 
+					//window.prompt('horizontal Win 1'); 
 					return true;
 				} 
 			}else horCount = 0;
@@ -209,7 +213,7 @@ function Board(){
 		}
 
 		if(diagCount === 4){
-			window.prompt('diagonal win 1');
+			//window.prompt('diagonal win 1');
 			return true;
 		}
 		return false;
@@ -235,7 +239,7 @@ function Board(){
 		}
 
 		if(diagCount === 4){
-			window.prompt('diagonal win 2');
+			//window.prompt('diagonal win 2');
 			return true;
 		}
 		return false;

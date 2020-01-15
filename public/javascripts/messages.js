@@ -31,6 +31,13 @@
     type: "GAME-STARTED",
   };
   exports.S_GAME_STARTED = JSON.stringify(exports.O_GAME_STARTED);
+  /*
+   * Server to client: abort game (e.g. if second player exited the game)
+   */
+  exports.O_GAME_RESTART = {
+    type: "GAME-RESTART",
+  };
+  exports.S_GAME_STARTED = JSON.stringify(exports.O_GAME_STARTED);
 
   /*
    * Server to client: you are player number...
