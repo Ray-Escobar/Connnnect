@@ -1,18 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<title>Connnnect</title>
-	</head>
-	<body>
-		<h1>Connect</h1>
-		<button id='but'>Yeah</button>
-	
-		<script>
-			var button = document.getElementById('but');
-			button.onclick = function(){
-				//socket.
-			}
-		</script>
-	</body>
+
+<head>
+	<meta charset="utf-8">
+	<title>Connnnect</title>
+	<link rel="stylesheet" type="text/css" href="stylesheets/style.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script type="text/javascript">
+		jQuery(document).ready(function ($) {
+			$(".clickable-row").click(function () {
+				window.location = $(this).data("href");
+			});
+		});
+	</script>
+</head>
+
+<body>
+	<header>
+		<h1>Connnnect</h1>
+	</header>
+
+	<div id="popup-stats" class="overlay">
+		<div class="popup">
+			<div class="popup-header">
+				<h2>Statistics</h2>
+				<a class="close" href="#">&times;</a>
+			</div>
+			<div class="content">
+				<ul>
+					<li>Games Started: <span>420</span></li>
+					<li>Games Completed: <span>69</span></li>
+					<li>Games Aborted: <span>313</span></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<section class="game splash">
+		<table>
+			<tr>
+				<td id="00"></td>
+				<td id="01"></td>
+				<td id="02"></td>
+				<td id="03"></td>
+				<td id="04"></td>
+				<td id="05"></td>
+				<td id="06"></td>
+			</tr>
+			<tr>
+				<td id="10"></td>
+				<td id="11"></td>
+				<td id="12"></td>
+				<td id="13"></td>
+				<td id="14"></td>
+				<td id="15"></td>
+				<td id="16"></td>
+			</tr>
+			<tr>
+				<td id="20"></td>
+				<td id="21"></td>
+				<td id="22"></td>
+				<td id="23"></td>
+				<td id="24"></td>
+				<td id="25"></td>
+				<td id="26"></td>
+			</tr>
+			<tr data-href="/game" class="clickable-row blue-row">
+				<td id="30">P</td>
+				<td id="31">L</td>
+				<td id="32">A</td>
+				<td id="33">Y</td>
+				<td id="34"></td>
+				<td id="35"></td>
+				<td id="36"></td>
+			</tr>
+			<tr data-href="#popup-stats" class="clickable-row red-row">
+				<td id="40">S</td>
+				<td id="41">T</td>
+				<td id="42">A</td>
+				<td id="43">T</td>
+				<td id="44">S</td>
+				<td id="45"></td>
+				<td id="46"></td>
+			</tr>
+			<tr data-href="#popup-how" class="clickable-row blue-row">
+				<td id="50">H</td>
+				<td id="51">O</td>
+				<td id="52">W</td>
+				<td id="53"> </td>
+				<td id="54">T</td>
+				<td id="55">O</td>
+				<td id="56">?</td>
+			</tr>
+		</table>
+	</section>
+</body>
+
 </html>
