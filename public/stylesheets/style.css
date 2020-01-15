@@ -84,6 +84,7 @@ header p span{
 section.game td {
 	background-color: #333333;
 }
+
 .selectors td:hover{
 	background-color: white;
 }

@@ -28,7 +28,7 @@
    * Server to client: abort game (e.g. if second player exited the game)
    */
   exports.O_GAME_STARTED = {
-    type: "GAME-STARTED"
+    type: "GAME-STARTED",
   };
   exports.S_GAME_STARTED = JSON.stringify(exports.O_GAME_STARTED);
 
@@ -38,13 +38,13 @@
   exports.T_PLAYER_JOIN = "PLAYER-JOINED";
   exports.O_PLAYER_1 = {
     type: exports.T_PLAYER_JOIN,
-    data: "1"
+    data: 1
   };
   exports.S_PLAYER_1 = JSON.stringify(exports.O_PLAYER_1);
   // ...
   exports.O_PLAYER_2 = {
     type: exports.T_PLAYER_JOIN,
-    data: "2"
+    data: 2
   };
   exports.S_PLAYER_2 = JSON.stringify(exports.O_PLAYER_2);
 

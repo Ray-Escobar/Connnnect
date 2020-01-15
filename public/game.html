@@ -1,26 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-	<meta charset="utf-8">
-	<title>Connnnect</title>
-	<link rel="stylesheet" type="text/css" href="stylesheets/style.css">
-	<script type="text/javascript" src="javascripts/conn.js" defer></script>
-</head>
-
-<body>
-	<!--Header stuff-->
-	<header>
-		<h1>Connnnect</h1>
-		<p> <span>Red's</span> turn</p>
-	</header>
-
-	<!--Aside Bar-->
-	<aside class="sidebar">
-		<h2>Score</h2>
-		<div class="players">
-			<table>
-				<td id='red-win' style="background-color: #b83d3d"> 0 </td>
+	<head>
+		<meta charset="utf-8">
+		<title>Connnnect</title>
+		<link rel="stylesheet" type="text/css" href="stylesheets/style.css">
+		<script type="text/javascript" src="javascripts/conn.js" defer></script>
+		<script type="text/javascript" src="javascripts/interaction.js" defer></script>
+		<script type="text/javascript" src="javascripts/messages.js" defer></script>
+	</head>
+	<body>
+		<!--Header stuff-->
+		<header>
+			<h1 >Connnnect</h1>
+			<p> Waiting on other Player to join</p>
+		</header>
+		
+		<!--Aside Bar-->
+		<aside class="sidebar">
+			<h2>Score</h2>
+			<div class="players">
+				<table>
+					<td id= 'red-win' style="background-color: #b83d3d"> 0 </td>
+				</table>
+				<p> Player 1</p>
+			</div>
+			<div class="players">
+				<table>
+					<td id= 'blue-win' style="background-color: #5275cc"> 0 </td>
+				</table>
+				<p> Player 2 </p>
+			</div>
+			
+			<div class="ret-sound">
+				<table>
+					<tr>
+						<td id="reset">
+							<img src="images/arrow.png" style="width: 80%">
+						</td>
+						<td id="sound">
+							<img src="images/sound.png" style="width: 80%">
+						</td>
+					</tr>
+				</table>
+			</div>
+			<div class="timer">
+				<p><span>Red's</span> Turn</p>
+				<p id="time">20</p>
+			</div>
+		</aside>
+		
+		<!-- Main Game Section-->
+		<section class="selectors" id="selectors">
+			<table > <!--id="arrow-selector"-->
+				<tr>
+					<td id="choose0"></td>
+					<td id="choose1"></td>
+					<td id="choose2"></td>
+					<td id="choose3"></td>
+					<td id="choose4"></td>
+					<td id="choose5"></td>
+					<td id="choose6"></td>
+				</tr>
 			</table>
 			<p> Player 1</p>
 		</div>
@@ -130,3 +170,4 @@
 
 <!--Blue style="background-color: #5275cc"; -->
 <!--Red below background-color: #b83d3d -->
+
