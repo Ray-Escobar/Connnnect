@@ -19,12 +19,12 @@ function gridCreator(){
 }
 
 
-/*Utility function to print the array (debugging) */
+/*Utility function to print the array (debugging) 
 function arrayPrinter2d(arr){
   for(let i = 0; i < arr.length; i++){
     console.log(arr[i]);
   }
-}
+}*/
 
 /*Object Game: brings all other three objects together, runs basic operations*/
 
@@ -36,24 +36,31 @@ function Game(){
   this.count     = 0; 		//count all moves(so it not exceed 42 moves)
 
   this.fill = function(num){
-    if(this.board.validBlock(num)){
-      let i = this.board.fillBlock(num);    //fill and return row of fill
+    /*
+	if(this.board.validBlock(num)){
+      
+    }*/
+    let i = this.board.fillBlock(num);    //fill and return row of fill
 
-      if(this.board.verifyWin(i, num)){
-        this.reset(true);
-      }else{
-        this.changeTextColor();
-        this.count++;
-        this.resetTime();
-      } 
-    }
+    if(this.board.verifyWin(i, num)){
+      this.reset(true);
+    }else{
+      this.changeTextColor();
+      this.count++;
+      this.resetTime();
+    } 
 
     /*To implemet, draw in server*/
     if(this.count === 42){
       window.prompt('It\'s a draw');
       this.board.cleanBoard();
-    } 
-		
+    } 	
+  };
+  /*
+  Verify if colomun has space for a block
+  */
+  this.verifyValidCol = function(col){
+    return this.board.validBlock(col);
   };
   this.fillOpponent = function(num){
     this.board.changeColor(); //use opponents color to fill block

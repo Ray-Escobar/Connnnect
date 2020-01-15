@@ -56,11 +56,6 @@ let startTime = false;
     document.getElementById('turn').textContent = 'Waiting for move...'
   }
   /*If player sends reset, other playr notified*/
-  function sendReset(){
-    socket.send(JSON.stringify(Messages.O_GAME_RESTART));
-    yourTurn = false;
-    document.getElementById('selectors').className = 'Not-your-turn'; //deactivate glow on selectors
-  }
 
   socket.onmessage = function(mssg){
     let incomingMsg = JSON.parse(mssg.data);
@@ -103,57 +98,55 @@ let startTime = false;
             
     }
         
-  }
+  };
 
   /*Boolean 'yourTurn' manages turns of players, updated on each connect with server*/
   button0.addEventListener('click', function(){
-    if(yourTurn){
+    if(yourTurn && verifyMove(0)){
       sendColumn(0); //uses function to send mssg to server
       game.fill(0);
     }
   });
   button1.addEventListener('click', function(){
-    if(yourTurn){
+    if(yourTurn && verifyMove(1)){
       sendColumn(1);
       game.fill(1);
     }
   });
   button2.addEventListener('click', function(){
-    if(yourTurn){
+    if(yourTurn && verifyMove(2)){
       sendColumn(2);
       game.fill(2); 
     }
   });
   button3.addEventListener('click', function(){
-    if(yourTurn){
+    if(yourTurn && verifyMove(3)){
       sendColumn(3);
       game.fill(3);
     } 
   });
   button4.addEventListener('click', function(){
-    if(yourTurn){
+    if(yourTurn && verifyMove(4)){
       sendColumn(4);
       game.fill(4);
     }
   });
   button5.addEventListener('click', function(){
-    if(yourTurn){
+    if(yourTurn && verifyMove(5)){
       sendColumn(5);
       game.fill(5);
     }
   });
   button6.addEventListener('click', function(){
-    if(yourTurn){
+    if(yourTurn && verifyMove(6)){
       sendColumn(6);
       game.fill(6);   
     }
-  });
-  reset.addEventListener('click', function(){
-    if(yourTurn){
-      game.reset();
-      sendReset();
-    }
-  });    
+  }); 
+  
+  function verifyMove(col){
+    return game.verifyValidCol(col);
+  }
 })(); //executres immediately
 
 
