@@ -87,7 +87,22 @@ header p span {
 }
 
 .ret-sound td:hover {
-  background-color: white;
+  background-color: #333333;
+  cursor: pointer;
+}
+.fullscreen-button {
+  position: absolute;
+  margin-left: 20px;
+  padding: 5px;
+  border-radius: 5px;
+}
+.fullscreen-button:hover {
+  background-color: #333;
+  cursor: pointer;
+}
+.fullscreen-button:active {
+  background-color: #666;
+  cursor: pointer;
 }
 
 /*Style for game table */
@@ -98,6 +113,7 @@ section.game td {
 
 .selectors td:hover {
   background-color: white;
+  cursor: pointer;
 }
 
 /*=====================
@@ -119,9 +135,13 @@ section.splash tr.red-row td:not(:empty) {
   background-color: #b83d3d;
 }
 
+section.splash tr[data-href]:active td:not(:empty) {
+  opacity: 0.8;
+}
+
 section.splash tr[data-href]:hover td:not(:empty) {
   cursor: pointer;
-  opacity: 0.8;
+  border: 2px solid #fff;
   -webkit-animation: jiggle 0.2s infinite;
   -moz-animation-duration: 0.2s;
   -moz-animation-name: jiggle;
