@@ -14,6 +14,9 @@
  * option
  * * * * * * * * */
 
+var blockAudio = new Audio('ping.mp3');
+blockAudio.volume = 0.4;
+
 let game  = new Game();  //game object
 
 /*Button Listener Events*/
@@ -89,6 +92,7 @@ let startTime = false;
       yourTurn = true;
 
     }else{
+      blockAudio.play();
       let turn = document.getElementById('turn');
       let sp   = document.createElement('span');
       sp.textContent = 'Your ';
@@ -103,8 +107,7 @@ let startTime = false;
         
   };
 
-  var blockAudio = new Audio('ping.mp3');
-  blockAudio.volume = 0.4;
+  
 
   /*Boolean 'yourTurn' manages turns of players, updated on each connect with server*/
   button0.addEventListener('click', function(){
