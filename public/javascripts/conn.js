@@ -1,3 +1,4 @@
+/* eslint-disable indent*/
 //@ts-check
 
 
@@ -43,18 +44,19 @@ function Game(){
     let i = this.board.fillBlock(num);    //fill and return row of fill
 
     if(this.board.verifyWin(i, num)){
-      this.reset(true);
+		this.reset(true);
+		return true;
     }else{
-      this.changeTextColor();
-      this.count++;
-      this.resetTime();
-    } 
-
+		this.changeTextColor();
+		this.count++;
+		this.resetTime();
+	} 
     /*To implemet, draw in server*/
     if(this.count === 42){
       window.prompt('It\'s a draw');
       this.board.cleanBoard();
-    } 	
+	}
+	return false;
   };
   /*
   Verify if colomun has space for a block

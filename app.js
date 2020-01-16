@@ -85,6 +85,11 @@ wss.on("connection", function(ws) {
 
   con.on("message", function incoming(message) {
     let oMsg = JSON.parse(message);
+    if(oMsg.win === true){ //if win is true, add to games completed
+        gameStatus.gamesCompleted++; 
+        oMsg.win = false;
+        //reset players 1 win here send()
+    } 
 
     let gameObj = websockets[con.id];
     let isPlayer1 = gameObj.player1 == con ? true : false;
@@ -121,15 +126,15 @@ wss.on("connection", function(ws) {
          * close it
          */
         try {
-          gameObj.playerA.close();
-          gameObj.playerA = null;
+          gameObj.player1.close();
+          gameObj.player1 = null;
         } catch (e) {
           console.log("Player A closing: " + e);
         }
 
         try {
-          gameObj.playerB.close();
-          gameObj.playerB = null;
+          gameObj.player2.close();
+          gameObj.player2 = null;
         } catch (e) {
           console.log("Player B closing: " + e);
         }

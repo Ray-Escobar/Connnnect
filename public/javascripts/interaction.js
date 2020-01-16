@@ -1,5 +1,6 @@
 /* eslint-disable quotes */
 /* eslint-disable no-undef */
+/* eslint-disable indent*/
 //@ts-check
 
 /* * * * * * * * *
@@ -23,7 +24,6 @@ const button3 = document.getElementById('choose3');
 const button4 = document.getElementById('choose4');
 const button5 = document.getElementById('choose5');
 const button6 = document.getElementById('choose6');
-const reset   = document.getElementById('reset');
 
 
 
@@ -47,13 +47,16 @@ let startTime = false;
     }
   }, 1000);
 
-  function sendColumn(col){
+  function sendColumn(col, isWin){
     let outgoingMsg = Messages.O_PICK_A_COLUMN;
     outgoingMsg.data = col;  //column number
+    if(isWin) outgoingMsg.win = true;
     socket.send(JSON.stringify(outgoingMsg));
+    console.log(JSON.stringify(outgoingMsg));
+    
     yourTurn = false;
     document.getElementById('selectors').className = 'Not-your-turn'; //deactivate glow on selectors
-    document.getElementById('turn').textContent = 'Waiting for move...'
+    document.getElementById('turn').textContent = 'Waiting for move...';
   }
   /*If player sends reset, other playr notified*/
 
@@ -66,12 +69,12 @@ let startTime = false;
       } 
       else{
         game.board.currentColor = 2; //p2 is blue
-        document.getElementById('turn').textContent = 'Waiting for move...'
+        document.getElementById('turn').textContent = 'Waiting for move...';
         document.getElementById('selectors').className = 'Not-your-turn';
 
       }                       
             
-    }else if(incomingMsg.type == 'GAME-STARTED'){
+    }else if(incomingMsg.type === 'GAME-STARTED'){
       /*change text to tell players it has started*/
       let text = document.querySelector('header p');
       let sp = document.createElement('span');
@@ -80,7 +83,7 @@ let startTime = false;
       text.prepend(sp);
       startTime = true;
 
-    }else if(incomingMsg.type == 'GAME-RESTART'){
+    }else if(incomingMsg.type === 'GAME-RESTART'){
       game.reset();
       document.getElementById('selectors').className = 'selectors';
       yourTurn = true;
@@ -103,49 +106,49 @@ let startTime = false;
   /*Boolean 'yourTurn' manages turns of players, updated on each connect with server*/
   button0.addEventListener('click', function(){
     if(yourTurn && verifyMove(0)){
-      sendColumn(0); //uses function to send mssg to server
-      game.fill(0);
+        let isWin = game.fill(0);
+        sendColumn(0, isWin); //uses function to send mssg to server
     }
   });
   button1.addEventListener('click', function(){
     if(yourTurn && verifyMove(1)){
-      sendColumn(1);
-      game.fill(1);
+        let isWin = game.fill(1);
+        sendColumn(1, isWin);
     }
   });
   button2.addEventListener('click', function(){
     if(yourTurn && verifyMove(2)){
-      sendColumn(2);
-      game.fill(2); 
+        let isWin = game.fill(2);
+        sendColumn(2, isWin);
     }
   });
   button3.addEventListener('click', function(){
     if(yourTurn && verifyMove(3)){
-      sendColumn(3);
-      game.fill(3);
+        let isWin = game.fill(3);
+        sendColumn(3, isWin);
     } 
   });
   button4.addEventListener('click', function(){
     if(yourTurn && verifyMove(4)){
-      sendColumn(4);
-      game.fill(4);
+        let isWin = game.fill(4);
+        sendColumn(4, isWin);
     }
   });
   button5.addEventListener('click', function(){
     if(yourTurn && verifyMove(5)){
-      sendColumn(5);
-      game.fill(5);
+        let isWin = game.fill(5);
+        sendColumn(5, isWin);
     }
   });
   button6.addEventListener('click', function(){
     if(yourTurn && verifyMove(6)){
-      sendColumn(6);
-      game.fill(6);   
+        let isWin = game.fill(6);
+        sendColumn(6, isWin);
     }
   }); 
   
   function verifyMove(col){
-    return game.verifyValidCol(col);
+      return game.verifyValidCol(col);
   }
 })(); //executres immediately
 

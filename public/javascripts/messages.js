@@ -61,7 +61,8 @@
   exports.T_PICK_A_COLUMN = "PICK-COLUMN";
   exports.O_PICK_A_COLUMN = {
     type: exports.T_PICK_A_COLUMN,
-    data: null
+    data: null,
+    win : false
   };
   //exports.S_PICK_A_COLUMN does not exist, as data needs to be set
 
