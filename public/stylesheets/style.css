@@ -20,7 +20,7 @@ table {
 }
 
 table, td {
-  border: 1px #a1a1a1;
+  border: 1px solid#2c2c2c;
   border-radius: 10px;
 }
 
@@ -114,6 +114,10 @@ section.game td {
 .selectors td:hover {
   background-color: white;
   cursor: pointer;
+}
+
+.selectors td {
+  border: 1px solid #444;
 }
 
 /*=====================
