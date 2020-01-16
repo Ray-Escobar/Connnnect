@@ -33,3 +33,10 @@ jQuery(document).ready(function ($) {
     });
 });
 
+// Sound functionality
+var blockAudio = new Audio('ping.mp3');
+blockAudio.volume = 0.5;
+
+function updateVolume() {
+    blockAudio.volume = (blockAudio.volume === 0.5)? 0.0 : 0.5;
+}

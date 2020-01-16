@@ -14,9 +14,6 @@
  * option
  * * * * * * * * */
 
-var blockAudio = new Audio('ping.mp3');
-blockAudio.volume = 0.4;
-
 let game  = new Game();  //game object
 
 /*Button Listener Events*/
