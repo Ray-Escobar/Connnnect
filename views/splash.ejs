@@ -16,10 +16,6 @@
 </head>
 
 <body>
-	<header>
-		<h1>Connnnect</h1>
-	</header>
-
 	<div id="popup-stats" class="overlay">
 		<div class="popup">
 			<div class="popup-header">
@@ -30,7 +26,7 @@
 				<ul>
 					<li>Games Initialized: <span><%= gamesInitialized %></span></li>
 					<li>Games Completed: <span><%= gamesCompleted %> </span></li>
-                    <li>Games Aborted: <span><%= gamesAborted %> </span></li>
+					<li>Games Aborted: <span><%= gamesAborted %> </span></li>
 				</ul>
 			</div>
 		</div>
@@ -46,72 +42,82 @@
 				<ul>
 					<li><span class="white">Goal:</span> get <span>4 of your color</span> checkers in a row
 						<span>horizontally, vertically, or diagonally</span></li>
-					<li><span>On your turn, </span><span>choose a column</span> to drop one of your checkers it will take the <span>lowest unoccupied slot</span></li>
-					<li><span class="white">TIP: </span>place your first checker in the <span>middle of the bottom row</span></li>
+					<li><span>On your turn, </span><span>choose a column</span> to drop one of your checkers it will
+						take the <span>lowest unoccupied slot</span></li>
+					<li><span class="white">TIP: </span>place your first checker in the <span>middle of the bottom
+							row</span></li>
 				</ul>
 			</div>
 		</div>
 	</div>
 
+	<div >
+		<header>
+			<h1>Connnnect</h1>
+		</header>
 
-	<section class="game splash">
-		<table>
-			<tr>
-				<td id="00"></td>
-				<td id="01"></td>
-				<td id="02"></td>
-				<td id="03"></td>
-				<td id="04"></td>
-				<td id="05"></td>
-				<td id="06"></td>
-			</tr>
-			<tr>
-				<td id="10"></td>
-				<td id="11"></td>
-				<td id="12"></td>
-				<td id="13"></td>
-				<td id="14"></td>
-				<td id="15"></td>
-				<td id="16"></td>
-			</tr>
-			<tr>
-				<td id="20"></td>
-				<td id="21"></td>
-				<td id="22"></td>
-				<td id="23"></td>
-				<td id="24"></td>
-				<td id="25"></td>
-				<td id="26"></td>
-			</tr>
-			<tr data-href="/game" class="clickable-row blue-row">
-				<td id="30">P</td>
-				<td id="31">L</td>
-				<td id="32">A</td>
-				<td id="33">Y</td>
-				<td id="34"></td>
-				<td id="35"></td>
-				<td id="36"></td>
-			</tr>
-			<tr data-href="#popup-stats" class="clickable-row red-row">
-				<td id="40">S</td>
-				<td id="41">T</td>
-				<td id="42">A</td>
-				<td id="43">T</td>
-				<td id="44">S</td>
-				<td id="45"></td>
-				<td id="46"></td>
-			</tr>
-			<tr data-href="#popup-how" class="clickable-row blue-row">
-				<td id="50">H</td>
-				<td id="51">O</td>
-				<td id="52">W</td>
-				<td id="53"> </td>
-				<td id="54">T</td>
-				<td id="55">O</td>
-				<td id="56">?</td>
-			</tr>
-		</table>
-	</section>
+		<section class="game splash">
+			<table>
+				<tr>
+					<td id="00"></td>
+					<td id="01"></td>
+					<td id="02"></td>
+					<td id="03"></td>
+					<td id="04"></td>
+					<td id="05"></td>
+					<td id="06"></td>
+				</tr>
+				<tr>
+					<td id="10"></td>
+					<td id="11"></td>
+					<td id="12"></td>
+					<td id="13"></td>
+					<td id="14"></td>
+					<td id="15"></td>
+					<td id="16"></td>
+				</tr>
+				<tr>
+					<td id="20"></td>
+					<td id="21"></td>
+					<td id="22"></td>
+					<td id="23"></td>
+					<td id="24"></td>
+					<td id="25"></td>
+					<td id="26"></td>
+				</tr>
+				<tr data-href="/game" class="clickable-row blue-row">
+					<td id="30">P</td>
+					<td id="31">L</td>
+					<td id="32">A</td>
+					<td id="33">Y</td>
+					<td id="34"></td>
+					<td id="35"></td>
+					<td id="36"></td>
+				</tr>
+				<tr data-href="#popup-stats" class="clickable-row red-row">
+					<td id="40">S</td>
+					<td id="41">T</td>
+					<td id="42">A</td>
+					<td id="43">T</td>
+					<td id="44">S</td>
+					<td id="45"></td>
+					<td id="46"></td>
+				</tr>
+				<tr data-href="#popup-how" class="clickable-row blue-row">
+					<td id="50">H</td>
+					<td id="51">O</td>
+					<td id="52">W</td>
+					<td id="53"> </td>
+					<td id="54">T</td>
+					<td id="55">O</td>
+					<td id="56">?</td>
+				</tr>
+			</table>
+		</section>
+	</div>
+	<div style="position: absolute; bottom: 0px; width: 100%; box-sizing: border-box;">
+		<p style="text-align: center; opacity: 0.2;">Pietro & Afonso</p>
+	</div>
 </body>
 
 </html>
