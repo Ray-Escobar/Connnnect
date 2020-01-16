@@ -34,8 +34,8 @@ let startTime = false;
 (function setup() {
 
   //NOTE: this port has to be the same as the one started in server!!!!!!!
-  var socket   = new WebSocket("ws://localhost:3200");
-
+  var socket   = new WebSocket("ws://localhost:3000");
+    
   /*start counter*/
   let countDown = setInterval(function(){
     if(yourTurn){
@@ -93,6 +93,7 @@ let startTime = false;
     }else if(incomingMsg.type === 'GAME-ABORTED'){ //only way game ends
       window.location.replace("/");
     }else{
+      blockAudio.play();
       let turn = document.getElementById('turn');
       let sp   = document.createElement('span');
       sp.textContent = 'Your ';
@@ -113,47 +114,56 @@ let startTime = false;
     }, 4000);
   };
 
+  
+
   /*Boolean 'yourTurn' manages turns of players, updated on each connect with server*/
   button0.addEventListener('click', function(){
     if(yourTurn && verifyMove(0)){
         let isWin = game.fill(0);
         sendColumn(0, isWin); //uses function to send mssg to server
+        blockAudio.play();
     }
   });
   button1.addEventListener('click', function(){
     if(yourTurn && verifyMove(1)){
         let isWin = game.fill(1);
         sendColumn(1, isWin);
+        blockAudio.play();
     }
   });
   button2.addEventListener('click', function(){
     if(yourTurn && verifyMove(2)){
         let isWin = game.fill(2);
         sendColumn(2, isWin);
+        blockAudio.play();
     }
   });
   button3.addEventListener('click', function(){
     if(yourTurn && verifyMove(3)){
         let isWin = game.fill(3);
         sendColumn(3, isWin);
+        blockAudio.play();
     } 
   });
   button4.addEventListener('click', function(){
     if(yourTurn && verifyMove(4)){
         let isWin = game.fill(4);
         sendColumn(4, isWin);
+        blockAudio.play();
     }
   });
   button5.addEventListener('click', function(){
     if(yourTurn && verifyMove(5)){
         let isWin = game.fill(5);
         sendColumn(5, isWin);
+        blockAudio.play();
     }
   });
   button6.addEventListener('click', function(){
     if(yourTurn && verifyMove(6)){
         let isWin = game.fill(6);
         sendColumn(6, isWin);
+        blockAudio.play();
     }
   }); 
   
