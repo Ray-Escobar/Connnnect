@@ -27,10 +27,17 @@
   /*
    * Server to client: abort game (e.g. if second player exited the game)
    */
-  exports.O_GAME_STARTED = {
+  exports.O_GAME_STARTED_1 = {
     type: "GAME-STARTED",
+    yourTurn: true
   };
-  exports.S_GAME_STARTED = JSON.stringify(exports.O_GAME_STARTED);
+  exports.S_GAME_STARTED_1 = JSON.stringify(exports.O_GAME_STARTED_1);
+  
+  exports.O_GAME_STARTED_2 = {
+    type: "GAME-STARTED",
+    yourTurn: false
+  };
+  exports.S_GAME_STARTED_2 = JSON.stringify(exports.O_GAME_STARTED_2);
   /*
    * Server to client: abort game (e.g. if second player exited the game)
    */

@@ -276,11 +276,11 @@ function Sidebar(){
     for(let i = 0; i < topText.length; i++){
       if(alternate){
         topText[i].style.color = '#5275cc';
-        topText[i].textContent = 'Blue\'s';
+        topText[i].textContent = 'Blue\'s ';
       } 
       else {
         topText[i].style.color = '#b83d3d';
-        topText[i].textContent = 'Red\'s';
+        topText[i].textContent = 'Red\'s ';
       }			   		
     }
 

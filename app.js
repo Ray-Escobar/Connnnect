@@ -78,21 +78,26 @@ wss.on("connection", function(ws) {
     console.log('Game Initialized');
     currentGame = new Game(gameStatus.gamesInitialized++);    
     let gameObj = websockets[con.id];
-    gameObj.player1.send(messages.S_GAME_STARTED); //start game mssg to p1
-    gameObj.player2.send(messages.S_GAME_STARTED); //start game mssg to p2
+    gameObj.player1.send(messages.S_GAME_STARTED_1); //start game mssg to p1
+    gameObj.player2.send(messages.S_GAME_STARTED_2); //start game mssg to p2
     
   }
 
   con.on("message", function incoming(message) {
     let oMsg = JSON.parse(message);
+    let gameObj = websockets[con.id];
+    let isPlayer1 = gameObj.player1 == con ? true : false;
+
+    //if(oMsg.type === 'GAME-ABORTED'){
+      //if(isPlayer1)
+    //}
     if(oMsg.win === true){ //if win is true, add to games completed
         gameStatus.gamesCompleted++; 
         oMsg.win = false;
         //reset players 1 win here send()
     } 
 
-    let gameObj = websockets[con.id];
-    let isPlayer1 = gameObj.player1 == con ? true : false;
+    
     
     console.log("[LOG] " + oMsg.data);
     
@@ -126,17 +131,24 @@ wss.on("connection", function(ws) {
          * close it
          */
         try {
+          //gameObj.player1.send(messages.O_GAME_ABORTED); //if still there redirect
           gameObj.player1.close();
           gameObj.player1 = null;
+          console.log('here 1')  
         } catch (e) {
-          console.log("Player A closing: " + e);
+          //console.log("Player A closing: " + e);
+          console.log("Player 1 was diconnected");
         }
 
         try {
+          //gameObj.player2.send(messages.O_GAME_ABORTED); //if still there redirect
           gameObj.player2.close();
           gameObj.player2 = null;
+          
+          console.log('here2');
         } catch (e) {
-          console.log("Player B closing: " + e);
+          //console.log("Player B closing: " + e);
+          console.log("Player 2 was diconnected " + e);
         }
       }
     }

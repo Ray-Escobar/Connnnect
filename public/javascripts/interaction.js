@@ -35,15 +35,17 @@ let startTime = false;
 
   //NOTE: this port has to be the same as the one started in server!!!!!!!
   var socket   = new WebSocket("ws://localhost:3200");
-    
+
   /*start counter*/
   let countDown = setInterval(function(){
-    if(startTime) game.decreaseTime();
-    if(game.getTime() == 0){
-      game.resetTime();
-      let randCol = Math.floor(Math.random()*7); //randomly assign a unit
-      game.fill(randCol);
-      sendColumn(randCol);
+    if(yourTurn){
+      if(startTime) game.decreaseTime();
+      if(game.getTime() == 0){
+        game.resetTime();
+        let randCol = Math.floor(Math.random()*7); //randomly assign a unit
+        game.fill(randCol);
+        sendColumn(randCol);
+      }
     }
   }, 1000);
 
@@ -65,7 +67,6 @@ let startTime = false;
     if(incomingMsg.type == 'PLAYER-JOINED'){
       if(incomingMsg.data === 1){
         game.board.currentColor = 1; //p1 is red
-        yourTurn = true;
       } 
       else{
         game.board.currentColor = 2; //p2 is blue
@@ -82,12 +83,15 @@ let startTime = false;
       sp.textContent = 'Red\'s ';
       text.prepend(sp);
       startTime = true;
+      yourTurn = incomingMsg.yourTurn;
 
     }else if(incomingMsg.type === 'GAME-RESTART'){
       game.reset();
       document.getElementById('selectors').className = 'selectors';
       yourTurn = true;
 
+    }else if(incomingMsg.type === 'GAME-ABORTED'){ //only way game ends
+      window.location.replace("/");
     }else{
       let turn = document.getElementById('turn');
       let sp   = document.createElement('span');
@@ -97,10 +101,16 @@ let startTime = false;
 
       document.getElementById('selectors').className = 'selectors';
       game.fillOpponent(incomingMsg.data); //fill in col from what server sends
-      yourTurn = true;
-            
-    }
-        
+      yourTurn = true;       
+    }     
+  };
+  socket.onclose = function(){
+    clearInterval(countDown);
+    yourTurn = false;
+    document.querySelector('header p').textContent= 'Other player has left, sending back to homescreen...';
+    setTimeout(function() {
+      window.location.replace("/");
+    }, 4000);
   };
 
   /*Boolean 'yourTurn' manages turns of players, updated on each connect with server*/
