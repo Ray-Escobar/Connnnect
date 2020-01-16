@@ -34,7 +34,7 @@ let startTime = false;
 (function setup() {
 
   //NOTE: this port has to be the same as the one started in server!!!!!!!
-  var socket   = new WebSocket("ws://localhost:3000");
+  var socket   = new WebSocket("ws://localhost:3200");
     
   /*start counter*/
   let countDown = setInterval(function(){
@@ -50,6 +50,7 @@ let startTime = false;
   }, 1000);
 
   function sendColumn(col, isWin){
+    // @ts-ignore
     let outgoingMsg = Messages.O_PICK_A_COLUMN;
     outgoingMsg.data = col;  //column number
     if(isWin) outgoingMsg.win = true;
