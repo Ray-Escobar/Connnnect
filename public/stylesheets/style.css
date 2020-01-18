@@ -1,22 +1,31 @@
+/*====================
+  G A M E
+  ====================*/
 body {
   background-color: #2c2c2c;
+  margin: auto;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  /* font-family: Tahoma, Arial, sans-serif; */
   margin: 0px;
 }
 
 p, h2 {
   color: white;
 }
+.game-section{
+  display: flex;
+  margin-left: 180px;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  min-height: 50vh;
+}
+
 
 table {
   border-collapse: separate;
   border-spacing: 0;
-  margin-left: auto;
-  margin-right: auto;
   margin-top: 10px;
   border-spacing: 5px;
-  /*width: 800px;*/
 }
 
 table, td {
@@ -51,7 +60,7 @@ header p span {
 /* Side Bar Styling*/
 
 .sidebar {
-  float: right;
+  /*float: right;*/
   padding-top: 100px;
 }
 
@@ -129,6 +138,12 @@ section.splash {
   color: white;
   height: 70vh;
   width: auto;
+}
+
+.splash table{
+  margin-left: auto;
+  margin-right: auto;
+
 }
 
 section.splash tr.blue-row td:not(:empty) {

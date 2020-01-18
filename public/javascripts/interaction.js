@@ -10,7 +10,7 @@
  * one of the columns, the listeners activate 
  * the Game method Fill(col). Game also manages
  * the time object and the side bar to keep record
- * of the game score, reset options and music 
+ * of the game scores and music 
  * option
  * * * * * * * * */
 
@@ -36,7 +36,7 @@ let startTime = false;
   //NOTE: this port has to be the same as the one started in server!!!!!!!
   var socket   = new WebSocket("ws://localhost:3200");
     
-  /*start counter*/
+  /*start time counter decrements if it's users turn*/
   let countDown = setInterval(function(){
     if(yourTurn){
       if(startTime) game.decreaseTime();
@@ -49,6 +49,7 @@ let startTime = false;
     }
   }, 1000);
 
+  /*Function sens column that player added through the socket*/
   function sendColumn(col, isWin){
     // @ts-ignore
     let outgoingMsg = Messages.O_PICK_A_COLUMN;
@@ -61,8 +62,14 @@ let startTime = false;
     document.getElementById('selectors').className = 'Not-your-turn'; //deactivate glow on selectors
     document.getElementById('turn').textContent = 'Waiting for move...';
   }
-  /*If player sends reset, other playr notified*/
-
+  /*On message received from socket there are these options:
+   *  - Realize a player joined and assign him his color
+   *  - 
+   *  - Start the game and give p1 the first move
+   *  - recieve the column move from other player an update baord accordingly
+   *
+   * 
+   */
   socket.onmessage = function(mssg){
     let incomingMsg = JSON.parse(mssg.data);
     if(incomingMsg.type == 'PLAYER-JOINED'){
@@ -91,8 +98,6 @@ let startTime = false;
       document.getElementById('selectors').className = 'selectors';
       yourTurn = true;
 
-    }else if(incomingMsg.type === 'GAME-ABORTED'){ //only way game ends
-      window.location.replace("/");
     }else{
       blockAudio.play();
       let turn = document.getElementById('turn');
@@ -106,6 +111,7 @@ let startTime = false;
       yourTurn = true;       
     }     
   };
+  /*
   socket.onclose = function(){
     clearInterval(countDown);
     yourTurn = false;
@@ -113,7 +119,7 @@ let startTime = false;
     setTimeout(function() {
       window.location.replace("/");
     }, 4000);
-  };
+  };*/
 
   
 
@@ -172,15 +178,3 @@ let startTime = false;
       return game.verifyValidCol(col);
   }
 })(); //executres immediately
-
-
-
-/*Every second the counter is decreased TO IMPLEMENT*/
-/*
-let countDown = setInterval(function(){
-	game.decreaseTime();
-}, 1000);
-
-
-
-*/

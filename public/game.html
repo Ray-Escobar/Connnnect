@@ -22,117 +22,121 @@
 		<h1>Connnnect</h1>
 		<p> Waiting on other Player to join</p>
 	</header>
+	<!--If this removes you are back on the divs-->
+	<div class="game-section">
 
-	<!--Aside Bar-->
-	<aside class="sidebar">
-		<h2>Score</h2>
-		<div class="players">
+		<!-- Main Game Section-->
+		<div>
+		<section class="selectors" id="selectors">
 			<table>
-				<td id='red-win' style="background-color: #b83d3d"> 0 </td>
-			</table>
-			<p> Player 1</p>
-		</div>
-		<div class="players">
-			<table>
-				<td id='blue-win' style="background-color: #5275cc"> 0 </td>
-			</table>
-			<p> Player 2 </p>
-		</div>
-
-		<div class="ret-sound">
-			<table>
+				<!--id="arrow-selector"-->
 				<tr>
-					<!-- <td id="reset"> -->
-					<td>
-						<a href="/"><img src="images/arrow.png" style="width: 80%"></a>
-					</td>
-					<td id="sound" onclick="updateVolume();">
-						<img src="images/sound.png" style="width: 80%">
-					</td>
+					<td id="choose0"></td>
+					<td id="choose1"></td>
+					<td id="choose2"></td>
+					<td id="choose3"></td>
+					<td id="choose4"></td>
+					<td id="choose5"></td>
+					<td id="choose6"></td>
 				</tr>
 			</table>
-		</div>
-		<div class="timer">
-			<p id='turn'><span>Your</span> Turn</p>
-			<p id="time">20</p>
-		</div>
-	</aside>
+		</section>
+		<section class="game">
+			<table>
+				<tr>
+					<td id="00"></td>
+					<td id="01"></td>
+					<td id="02"></td>
+					<td id="03"></td>
+					<td id="04"></td>
+					<td id="05"></td>
+					<td id="06"></td>
+				</tr>
+				<tr>
+					<td id="10"></td>
+					<td id="11"></td>
+					<td id="12"></td>
+					<td id="13"></td>
+					<td id="14"></td>
+					<td id="15"></td>
+					<td id="16"></td>
+				</tr>
+				<tr>
+					<td id="20"></td>
+					<td id="21"></td>
+					<td id="22"></td>
+					<td id="23"></td>
+					<td id="24"></td>
+					<td id="25"></td>
+					<td id="26"></td>
+				</tr>
+				<tr>
+					<td id="30"></td>
+					<td id="31"></td>
+					<td id="32"></td>
+					<td id="33"></td>
+					<td id="34"></td>
+					<td id="35"></td>
+					<td id="36"></td>
+				</tr>
+				<tr>
+					<td id="40"></td>
+					<td id="41"></td>
+					<td id="42"></td>
+					<td id="43"></td>
+					<td id="44"></td>
+					<td id="45"></td>
+					<td id="46"></td>
+				</tr>
+				<tr>
+					<td id="50"></td>
+					<td id="51"></td>
+					<td id="52"></td>
+					<td id="53"></td>
+					<td id="54"></td>
+					<td id="55"></td>
+					<td id="56"></td>
+				</tr>
+			</table>
 
-	<!-- Main Game Section-->
-	<section class="selectors" id="selectors">
-		<table>
-			<!--id="arrow-selector"-->
-			<tr>
-				<td id="choose0"></td>
-				<td id="choose1"></td>
-				<td id="choose2"></td>
-				<td id="choose3"></td>
-				<td id="choose4"></td>
-				<td id="choose5"></td>
-				<td id="choose6"></td>
-			</tr>
-		</table>
-	</section>
-	<section class="game">
-		<table>
-			<tr>
-				<td id="00"></td>
-				<td id="01"></td>
-				<td id="02"></td>
-				<td id="03"></td>
-				<td id="04"></td>
-				<td id="05"></td>
-				<td id="06"></td>
-			</tr>
-			<tr>
-				<td id="10"></td>
-				<td id="11"></td>
-				<td id="12"></td>
-				<td id="13"></td>
-				<td id="14"></td>
-				<td id="15"></td>
-				<td id="16"></td>
-			</tr>
-			<tr>
-				<td id="20"></td>
-				<td id="21"></td>
-				<td id="22"></td>
-				<td id="23"></td>
-				<td id="24"></td>
-				<td id="25"></td>
-				<td id="26"></td>
-			</tr>
-			<tr>
-				<td id="30"></td>
-				<td id="31"></td>
-				<td id="32"></td>
-				<td id="33"></td>
-				<td id="34"></td>
-				<td id="35"></td>
-				<td id="36"></td>
-			</tr>
-			<tr>
-				<td id="40"></td>
-				<td id="41"></td>
-				<td id="42"></td>
-				<td id="43"></td>
-				<td id="44"></td>
-				<td id="45"></td>
-				<td id="46"></td>
-			</tr>
-			<tr>
-				<td id="50"></td>
-				<td id="51"></td>
-				<td id="52"></td>
-				<td id="53"></td>
-				<td id="54"></td>
-				<td id="55"></td>
-				<td id="56"></td>
-			</tr>
-		</table>
+		</section>
+	</div>
 
-	</section>
+		<!--Aside Bar-->
+		<aside class="sidebar">
+			<h2>Score</h2>
+			<div class="players">
+				<table>
+					<td id='red-win' style="background-color: #b83d3d"> 0 </td>
+				</table>
+				<p> Player 1</p>
+			</div>
+			<div class="players">
+				<table>
+					<td id='blue-win' style="background-color: #5275cc"> 0 </td>
+				</table>
+				<p> Player 2 </p>
+			</div>
 
+			<div class="ret-sound">
+				<table>
+					<tr>
+						<!-- <td id="reset"> -->
+						<td>
+							<a href="/"><img src="images/arrow.png" style="width: 80%"></a>
+						</td>
+						<td id="sound" onclick="updateVolume();">
+							<img src="images/sound.png" style="width: 80%">
+						</td>
+					</tr>
+				</table>
+			</div>
+			<div class="timer">
+				<p id='turn'><span>Your</span> Turn</p>
+				<p id="time">20</p>
+			</div>
+		</aside>
+	</div>
 
 </body>
 
