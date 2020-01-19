@@ -34,8 +34,8 @@ table, td {
 }
 
 td {
-  height: 85px;
-  width: 85px;
+  height: 80px;
+  width: 80px;
   text-align: center;
   margin: 5px;
 }
@@ -105,13 +105,13 @@ header p span {
   padding: 5px;
   border-radius: 5px;
 }
+
 .fullscreen-button:hover {
   background-color: #333;
   cursor: pointer;
 }
-.fullscreen-button:active {
+.fullscreen-button:active, :fullscreen .fullscreen-button {
   background-color: #666;
-  cursor: pointer;
 }
 
 /*Style for game table */
