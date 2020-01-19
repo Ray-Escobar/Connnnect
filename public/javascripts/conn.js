@@ -64,7 +64,7 @@ function Game(){
   this.verifyValidCol = function(col){
     return this.board.validBlock(col);
   };
-  this.fillOpponent = function(num){
+  this.fillFromOpponent = function(num){
     this.board.changeColor(); //use opponents color to fill block
     this.fill(num);
     this.board.changeColor(); //revert back to your own player color

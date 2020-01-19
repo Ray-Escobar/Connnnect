@@ -49,12 +49,13 @@ let startTime = false;
     }
   }, 1000);
 
-  /*Function sens column that player added through the socket*/
+  /*Function sends column that player added through the socket*/
   function sendColumn(col, isWin){
     // @ts-ignore
     let outgoingMsg = Messages.O_PICK_A_COLUMN;
     outgoingMsg.data = col;  //column number
     if(isWin) outgoingMsg.win = true;
+
     socket.send(JSON.stringify(outgoingMsg));
     console.log(JSON.stringify(outgoingMsg));
     
@@ -62,9 +63,10 @@ let startTime = false;
     document.getElementById('selectors').className = 'Not-your-turn'; //deactivate glow on selectors
     document.getElementById('turn').textContent = 'Waiting for move...';
   }
+  
   /*On message received from socket there are these options:
    *  - Realize a player joined and assign him his color
-   *  - 
+   *  - Restart (function deprecated) 
    *  - Start the game and give p1 the first move
    *  - recieve the column move from other player an update baord accordingly
    *
@@ -98,6 +100,7 @@ let startTime = false;
       document.getElementById('selectors').className = 'selectors';
       yourTurn = true;
 
+      /*Else client fills move from oponent and it's their turn*/
     }else{
       blockAudio.play();
       let turn = document.getElementById('turn');
@@ -107,11 +110,10 @@ let startTime = false;
       turn.prepend(sp);
 
       document.getElementById('selectors').className = 'selectors';
-      game.fillOpponent(incomingMsg.data); //fill in col from what server sends
+      game.fillFromOpponent(incomingMsg.data); //fill in col from what server sends from opponent
       yourTurn = true;       
     }     
   };
-  /*
   socket.onclose = function(){
     clearInterval(countDown);
     yourTurn = false;
@@ -119,7 +121,7 @@ let startTime = false;
     setTimeout(function() {
       window.location.replace("/");
     }, 4000);
-  };*/
+  };
 
   
 
