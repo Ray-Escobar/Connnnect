@@ -15,9 +15,11 @@
 
 
 <body>
-	<div onclick="fullscreen()" class="fullscreen-button" style="position: absolute;"><img src="images/fullscreen.png"
+	<div onclick="gofullscreen()" class="fullscreen-button" style="position: absolute;"><img src="images/fullscreen.png"
 			style="width: 30px">
 	</div>
+	<p class="fullscreen-message">Press ESC to leave fullscreen</p>
+	<p class="screen-warning">WARNING: THE GAME WAS DESIGNED FOR BIGGER SCREENS IN MIND, TRY FULLSREEN MAYBE</p>
 	<!--Header stuff-->
 	<header>
 		<h1>Connnnect</h1>
@@ -108,15 +110,19 @@
 			<h2>Score</h2>
 			<div class="players">
 				<table>
-					<td id='red-win' style="background-color: #b83d3d"> 0 </td>
+					<tr>
+						<td id='red-win' style="background-color: #b83d3d"> 0 </td>
+						<td>Player 1</td>
+					</tr>
 				</table>
-				<p> Player 1</p>
 			</div>
 			<div class="players">
 				<table>
-					<td id='blue-win' style="background-color: #5275cc"> 0 </td>
+					<tr>
+						<td id='blue-win' style="background-color: #5275cc"> 0 </td>
+						<td>Player 2</td>
+					</tr>
 				</table>
-				<p> Player 2 </p>
 			</div>
 
 			<div class="ret-sound">

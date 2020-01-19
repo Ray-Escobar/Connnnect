@@ -1,6 +1,6 @@
 // Fullscreen functionality
 let elem = document.documentElement;
-function fullscreen() {
+function gofullscreen() {
     if ((window.fullScreen) ||
         (window.innerWidth == screen.width && window.innerHeight == screen.height)) {
         if (document.exitFullscreen) {

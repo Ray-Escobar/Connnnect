@@ -89,7 +89,7 @@ let startTime = false;
       /*change text to tell players it has started*/
       let text = document.querySelector('header p');
       let sp = document.createElement('span');
-      text.textContent = 'turn';
+      text.textContent = 'Turn';
       sp.textContent = 'Red\'s ';
       text.prepend(sp);
       startTime = true;
@@ -106,7 +106,7 @@ let startTime = false;
       let turn = document.getElementById('turn');
       let sp   = document.createElement('span');
       sp.textContent = 'Your ';
-      turn.textContent = 'turn';
+      turn.textContent = 'Turn';
       turn.prepend(sp);
 
       document.getElementById('selectors').className = 'selectors';
